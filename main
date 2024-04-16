@@ -1,0 +1,138 @@
+int CENTER_LED = 7;
+
+void setup() {
+  for(int i = 2; i < 13; i++){
+    pinMode(i, OUTPUT);
+  }
+}
+
+// chạy theo thứ tự các nhánh
+void effect_1() {
+  int del = 200;
+  for(int i = 2; i < 13; i++){
+    digitalWrite(i, HIGH);
+    delay(del);
+  }
+  for(int i = 13; i >= 2; i--){
+    digitalWrite(i, LOW);
+    delay(del);
+  }
+}
+
+// chớp rồi tắt toàn bộ nhánh
+void effect_2() {
+  for (int i = 2; i < 13; i++){
+    digitalWrite(i, HIGH);
+  }
+  delay(100);
+  for (int i = 2; i < 13; i++){
+    digitalWrite(i, LOW);
+  }
+}
+
+// chạy từ giữa ra 2 bên rồi quay về
+void effect_3() {
+  int del = 250;
+
+  digitalWrite(CENTER_LED, HIGH);
+  delay(del);
+  digitalWrite(CENTER_LED, LOW);
+
+  int step = 1;
+  for(int i = 1; i <= 5; i++){
+    digitalWrite(CENTER_LED + step, HIGH);
+    digitalWrite(CENTER_LED - step, HIGH);
+    delay(del);
+
+    digitalWrite(CENTER_LED + step, LOW);
+    digitalWrite(CENTER_LED - step, LOW);
+    // delay(del);
+  
+    step++;
+  }
+  delay(30);
+  
+  for(int i = 1; i <= 5; i++){
+    digitalWrite(CENTER_LED + step, HIGH);
+    digitalWrite(CENTER_LED - step, HIGH);
+    delay(del);
+
+    digitalWrite(CENTER_LED + step, LOW);
+    digitalWrite(CENTER_LED - step, LOW);
+    // delay(del);
+  
+    step--;
+  }
+  digitalWrite(CENTER_LED, HIGH);
+  delay(del);
+  digitalWrite(CENTER_LED, LOW);
+}
+
+// đèn chạy từ trái sang phải
+void effect_4() {
+  int del = 300;
+  digitalWrite(1, HIGH);
+  delay(del);
+  digitalWrite(2, HIGH);
+  delay(del);
+
+  digitalWrite(1, LOW);
+  digitalWrite(3, HIGH);
+  delay(del);
+
+  digitalWrite(2, LOW);
+  digitalWrite(4, HIGH);
+  delay(del);
+
+  digitalWrite(3, LOW);
+  digitalWrite(5, HIGH);
+  delay(del);
+
+  digitalWrite(4, LOW);
+  digitalWrite(6, HIGH);
+  delay(del);
+
+  digitalWrite(5, LOW);
+  digitalWrite(7, HIGH);
+  delay(del);
+
+  digitalWrite(6, LOW);
+  digitalWrite(8, HIGH);
+  delay(del);
+
+  digitalWrite(7, LOW);
+  digitalWrite(9, HIGH);
+  delay(del);
+
+  digitalWrite(8, LOW);
+  digitalWrite(10, HIGH);
+  delay(del);
+
+  digitalWrite(9, LOW);
+  digitalWrite(11, HIGH);
+  delay(del);
+
+  digitalWrite(10, LOW);
+  delay(del);
+  digitalWrite(11, LOW);
+
+  // for(int i = 2; i < 13; i++){
+  //   digitalWrite(i - 1, HIGH);
+  //   digitalWrite(i + 1, LOW);
+  //   delay(del);
+  // }
+}
+
+void loop() {
+  effect_1();
+  delay(100);
+  for (int i = 1; i <= 5; i++){
+    effect_2();
+    delay(200);
+  }
+  delay(200);
+  effect_3();
+  delay(300);
+  effect_4();
+  delay(200);
+}
